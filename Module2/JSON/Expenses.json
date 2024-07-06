@@ -1,0 +1,24 @@
+[
+    {
+        "Item": "Car",
+        "Date": "2/17/2024",
+        "Amount": 18000.00,
+        "Category": "Car/Transport",
+        "Description": "",
+        "Receipt": null,
+        "Status": "New",
+        "submittedBy": "John Do",
+        "departmentalExpense": false
+    },
+    {
+        "Item": "Stationary Materials",
+        "Date": "3/17/2024",
+        "Amount": 180.50,
+        "Category": "Stationary",
+        "Description": "Pen, pencil and other stationary materials and",
+        "Receipt": "https://tigerinc.sharepoint.com/_api/v2.1/drives/b!BKnLxW3UVkGUD8y4ASfvTKpUkQpNZslFhwwgfAXYg4ezI5OKorHyS7zYlxeDGW3p/items/01VQJUVKHOCCLWHXTVYZFYJW5WKXDM7KBB/thumbnails/0/c48x48/content?prefer=noredirect%2Cclosestavailablesize&cb=1&s=L0xpc3RzL0NvbXBhbnkgRXhwZW5zZSBUcmFja2VyfFJlY2VpcHR8Mw",
+        "Status": "New",
+        "submittedBy": "Lee Gu",
+        "departmentalExpense": true
+    }
+]

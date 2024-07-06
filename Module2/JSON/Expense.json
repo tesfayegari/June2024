@@ -1,0 +1,11 @@
+{
+    "Item": "Car",
+    "Date": "2/17/2024",
+    "Amount": 18000.00,
+    "Category": " Car/Transport",
+    "Description": "",
+    "Receipt": null,
+    "Status": "New",
+    "submittedBy": "John Do",
+    "departmentalExpense": false
+}

@@ -1,0 +1,38 @@
+[
+    {
+        "name": "John Do",
+        "dateOfBirth": "4/1/1987",
+        "phone": "445-877-5858",
+        "email": "johndo@email.com",
+        "address": "123 Main av, Alexandria, VA",
+        "pets": [
+            {
+                "name": "Puppy",
+                "dateOfBirth": "1/3/2020",
+                "color": "black",
+                "type": "dog"
+            }
+        ]
+    },
+    {
+        "name": "John Smith",
+        "dateOfBirth": "3/1/1979",
+        "phone": "445-877-5858",
+        "email": "jsmoth@email.com",
+        "address": "123 Main av, Silver Spring, MD",
+        "pets": [
+            {
+                "name": "Puppy",
+                "dateOfBirth": "1/3/2019",
+                "color": "white",
+                "type": "dog"
+            },
+            {
+                "name": "Kitten",
+                "dateOfBirth": "1/3/2023",
+                "color": "gray",
+                "type": "cat"
+            }
+        ]
+    }
+]
