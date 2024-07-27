@@ -1,0 +1,19 @@
+[
+    {
+        "RequesterName": "John Do",
+        "Email": "tefayetem@gmail.com",
+        "Details": "Personal Vacation",
+        "Department": "Information Technology",
+        "StartDate": "6/24/2024",
+        "EndDate": "6/28/2024",
+        "Manager": {
+            "FullName": "Tesfaye Gari",
+            "Email": "admin@tigerinc.onmicrosoft.com"
+        },
+        "Status": "Requested",
+        "ManagerComment": "",
+        "LeaveType": "Paid Leave",
+        "NumberOfDays": "4 - Days"
+    }
+]
+

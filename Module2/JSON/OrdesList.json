@@ -1,88 +1,62 @@
 {
-  "value": [
-    {
-      "Products": [
+    "value": [
         {
-          "Title": "Beef - Bresaola",
-          "ID": 207
+            "Products": [
+                "Beef - Bresaola",
+                "Breadfruit",
+                "Banana - Green"
+            ],
+            "Assignedto": "Tesfaye Gari",
+            "Id": 1,
+            "Title": "Ord-9998811",
+            "Status": "Ordered",
+            "ID": 1
         },
         {
-          "Title": "Breadfruit",
-          "ID": 344
+            "Products": [
+                "Anisette - Mcguiness",
+                "Beans - Kidney White",
+                "Dehydrated Kelp Kombo",
+                "Fish - Bones"
+            ],
+            "Assignedto": "Tesfaye Gari",           
+            "Title": "ORD-09187656",
+            "Status": "Ordered"
+            
         },
         {
-          "Title": "Banana - Green",
-          "ID": 197
+            "Products": [
+                {
+                    "Title": "Appetizer - Asian Shrimp Roll",
+                    "ID": 11,
+                    "price": 6.77,
+                    "manufacturer": ""
+                }
+            ],
+            "Assignedto": {
+                "Title": "Tesfaye Gari",
+                "EMail": "admin@TigerInc.onmicrosoft.com"
+            },
+            "Id": 3,
+            "Title": "Demo order 1",
+            "Status": "Ordered",
+            "ID": 3
+        },
+        {
+            "Products": [
+                {
+                    "Title": "Anchovy Fillets",
+                    "ID": 843
+                }
+            ],
+            "Assignedto": {
+                "Title": "Tesfaye Gari",
+                "EMail": "admin@TigerInc.onmicrosoft.com"
+            },
+            "Id": 4,
+            "Title": "Demo 2",
+            "Status": "Ordered",
+            "ID": 4
         }
-      ],
-      "Assignedto": {
-        "Title": "Tesfaye Gari",
-        "EMail": "admin@TigerInc.onmicrosoft.com"
-      },
-      "Id": 1,
-      "Title": "Ord-9998811",
-      "Status": "Ordered",
-      "ID": 1
-    },
-    {
-      "Products": [
-        {
-          "Title": "Anisette - Mcguiness",
-          "ID": 946
-        },
-        {
-          "Title": "Beans - Kidney White",
-          "ID": 180
-        },
-        {
-          "Title": "Dehydrated Kelp Kombo",
-          "ID": 818
-        },
-        {
-          "Title": "Fish - Bones",
-          "ID": 24
-        }
-      ],
-      "Assignedto": {
-        "Title": "Tesfaye Gari",
-        "EMail": "admin@TigerInc.onmicrosoft.com"
-      },
-      "Id": 2,
-      "Title": "ORD-09187656",
-      "Status": "Ordered",
-      "ID": 2
-    },
-    {
-      "Products": [
-        {
-          "Title": "Appetizer - Asian Shrimp Roll",
-          "ID": 11
-        }
-      ],
-      "Assignedto": {
-        "Title": "Tesfaye Gari",
-        "EMail": "admin@TigerInc.onmicrosoft.com"
-      },
-      "Id": 3,
-      "Title": "Demo order 1",
-      "Status": "Ordered",
-      "ID": 3
-    },
-    {
-      "Products": [
-        {
-          "Title": "Anchovy Fillets",
-          "ID": 843
-        }
-      ],
-      "Assignedto": {
-        "Title": "Tesfaye Gari",
-        "EMail": "admin@TigerInc.onmicrosoft.com"
-      },
-      "Id": 4,
-      "Title": "Demo 2",
-      "Status": "Ordered",
-      "ID": 4
-    }
-  ]
+    ]
 }

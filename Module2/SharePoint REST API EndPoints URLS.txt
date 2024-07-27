@@ -1,0 +1,33 @@
+SharePoint REST API EndPoints (URLS)
+
+Site Details 
+
+https://siteUrl/_api/site
+Example: https://SiteURl/sites/InformationTechnology/_api/site
+
+Web (including root web) - Information about the parent web
+https://siteUrl/_api/web
+
+All SharePoint lists(lists and Libraries)
+https://siteUrl/_api/web/lists
+
+How to restrict only few properties of lists 
+ Ans: By using OData $select=Property1,Property2,Property3...
+Examle: https://siteUrl/_api/web/lists?$select=Title,Description,ItemCount,Created
+
+How to See only non Hidden lists
+Ans: Using oData $filter=Exp to restrict the record that is coming back 
+Examle: https://siteUrl/_api/web/lists?$select=Title,Description,ItemCount,Created&$fitler=Hidden eq false
+
+Details of 1 Lists Example Customers list with GUID 986a3635-327a-49a1-83b5-193bfb4b61f6
+Examle 1: https://siteUrl/_api/web/lists/getbytitle('Customers')
+Examle 2: https://siteUrl/_api/web/lists(guid'986a3635-327a-49a1-83b5-193bfb4b61f6')
+
+All items in a List 
+example :https://siteUrl/_api/web/lists/getbytitle('Customers')/items
+
+Challenge Question:
+Get all Information Technology Department Leave from Archive Leave Request Data list
+Answer:
+https://SiteURl/_api/Web/Lists/getbytitle('Archive Leave Request Data')/items?$filter=Department eq 'Information Technology'
+
