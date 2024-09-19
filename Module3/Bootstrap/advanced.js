@@ -80,7 +80,34 @@ let pricing = [
         emailInclude: true,
         helpAccess: true,
         link: { title: "Get Started", url: "https://google.com" }
-    }
+    },
+    {
+        title: "Pro",
+        price: 10,
+        numUsers: 20,
+        numStorage: 10,
+        emailInclude: true,
+        helpAccess: true,
+        link: { title: "Get Started", url: "https://google.com" }
+    },
+    {
+        title: "Enterprise",
+        price: 29,
+        numUsers: 30,
+        numStorage: 15,
+        emailInclude: true,
+        helpAccess: true,
+        link: { title: "Get Started", url: "https://google.com" }
+    },
+    {
+        title: "Silver",
+        price: 40,
+        numUsers: 50,
+        numStorage: 20,
+        emailInclude: true,
+        helpAccess: true,
+        link: { title: "Signup for free", url: "https://google.com" }
+    },
 ]
 
 /*
@@ -104,11 +131,39 @@ let pricing = [
             </div>
 */
 
-let pricingHtml = '';
 
-for(let p of pricing ){
-    pricingHtml = pricingHtml +  
-        `<div class="col-md-4">
+
+// if (document.getElementById('prices') != null) {
+//     document.getElementById('prices').innerHTML = pricingHtml;
+// }
+// console.log("entire html is ", pricingHtml);
+
+// user defined functions 
+
+window.onload = function Func() {
+    if (document.getElementById('prices') != null) {
+        document.getElementById('prices').innerHTML = pricingHtml;
+    }
+}
+
+
+// user Defined functions 
+/*
+Syntax: 
+function functionName (Paramertsrs){//parameters are optional 
+    //statements 
+
+    return data; //optional 
+
+}
+*/
+let pricingHtml = '';
+function buildPricesHtml(maxItem) {
+    let itemCount = 0;
+    pricingHtml = '';
+    for (let p of pricing) {
+        pricingHtml = pricingHtml +
+            `<div class="col-md-4">
                 <div class="card mb-4 rounded-3 shadow-sm">
                     <div class="card-header py-3">
                         <h4 class="my-0 fw-normal">${p.title}</h4>
@@ -125,13 +180,15 @@ for(let p of pricing ){
                         <button type="button" class="w-100 btn btn-lg btn-primary">${p.link.title}</button>
                     </div>
                 </div>
-            </div>`
-}
-
-
-
-window.onload = function Func(){
+            </div>`;
+        itemCount++;
+        if (itemCount == maxItem) {
+            break;
+        }
+    }
     document.getElementById('prices').innerHTML = pricingHtml;
 }
+
+
 
 

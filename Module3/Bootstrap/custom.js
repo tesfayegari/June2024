@@ -9,6 +9,12 @@ let currentYear = 2024;
 let isRaining = false;
 
 
+let firstName = `Tesfaye T`;//'Tesfaye T';//"Tesfaye T";
+let lastName = "Gari";
+
+//let fullName = firstName + " " + lastName; //Tesfaye T Gari
+let fullName = `${firstName} ${lastName}`; //Tesfaye T Gari
+
 let demo;
 let test = null;
 
@@ -19,6 +25,11 @@ let studentObj = { name: "John Do", dateOfBirth: "4/1/2000", phone: "123-987-987
 let a = 10;
 let b = 20;
 let c = "20";
+
+let testInc = 60;
+testInc = testInc + 20; // testInc  += 20;
+
+testInc = testInc + 1; //testInc++;
 
 a == b; //false
 a === b; //false
@@ -189,6 +200,14 @@ console.log("Even more Simplified version of the for loop")
 for(let p of pricing){
     console.log( "Item: ", p.title);
 }
+
+// some builtin functions 
+//let fnc = alert("I am teting alert function");
+
+let fnc  =confirm("Testing confirm function ");
+
+console.log(fnc);
+
 
 
 
