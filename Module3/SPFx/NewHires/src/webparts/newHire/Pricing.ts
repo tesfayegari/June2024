@@ -146,6 +146,23 @@ export class Utility {
                 break;
             }
         }
-        return `<div class="row row-cols-1 row-cols-md-3 mb-3 text-center  mt-5"> ${pricingHtml}</div>` ;
+        return `<div class="row row-cols-1 row-cols-md-3 mb-3 text-center  mt-5"> ${pricingHtml}</div>`;
+    }
+
+    buildEmployeesHtml(employees: any[], siteUrl: string) {       
+        let empslHtml = '';
+
+        for (let e of employees) {
+            empslHtml  +=
+                `<div class="card col-md-4">
+                    <img class="card-img-top" src="${siteUrl}/_layouts/15/userphoto.aspx?size=L&username=${e.Employee.EMail}" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                        <h4 class="card-title">${e.Employee.Title}</h4>
+                        <p class="card-text">${e.ShortBio.toString().substring(0, 130) + "..."}</p>
+                        <a href="#" class="btn btn-primary">Visit Profile</a>
+                    </div>
+                </div>`;           
+        }
+        return `<div class="row row-cols-1 row-cols-md-3 mb-3 text-center  mt-5"> ${empslHtml}</div>`;
     }
 }

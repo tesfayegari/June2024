@@ -1,7 +1,8 @@
 import { Version } from '@microsoft/sp-core-library';
 import {
   type IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneSlider
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { SPComponentLoader } from '@microsoft/sp-loader';
@@ -10,25 +11,39 @@ import { SPComponentLoader } from '@microsoft/sp-loader';
 //import { escape } from '@microsoft/sp-lodash-subset';
 
 import styles from './NewHireWebPart.module.scss';
-import * as strings from 'NewHireWebPartStrings';
+//import * as strings from 'NewHireWebPartStrings';
 import { Utility } from './Pricing';
+import { ReadSPData } from './services/ReadSPData';
 
 export interface INewHireWebPartProps {
   description: string;
+  maxItems: number;
 }
 
 export default class NewHireWebPart extends BaseClientSideWebPart<INewHireWebPartProps> {
 
-  
+
   public render(): void {
     SPComponentLoader.loadCss("https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css");
+    console.log("Your Site URL", this.context.pageContext.web.absoluteUrl);
 
+    let spService = new ReadSPData(this.context);
     let util = new Utility();
-   
-    this.domElement.innerHTML = `
-    <section class="${styles.newHire} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
-      ${util.buildPricesHtml(12)}
-    </section>`;
+
+    spService.readSharePointItems('NewHire', '$filter=Show ne false&$select=*,Employee/Title, Employee/EMail&$expand=Employee&$top=' + this.properties.maxItems)
+      .then(employees => {       
+        this.domElement.innerHTML = `
+        <section class="${styles.newHire} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
+          <h2>${this.properties.description}</h2>
+          ${util.buildEmployeesHtml(employees,this.context.pageContext.web.absoluteUrl)}
+        </section>`;
+      });
+
+    // this.domElement.innerHTML = `
+    // <section class="${styles.newHire} ${!!this.context.sdks.microsoftTeams ? styles.teams : ''}">
+    //   <h2>${this.properties.description}</h2>
+    //   ${util.buildPricesHtml(this.properties.maxItems)}
+    // </section>`;
   }
 
   protected get dataVersion(): Version {
@@ -40,15 +55,16 @@ export default class NewHireWebPart extends BaseClientSideWebPart<INewHireWebPar
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: 'Webpart Settings'
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: 'General Setting',
               groupFields: [
                 PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
+                  label: 'Webpart Title'
+                }),
+                PropertyPaneSlider('maxItems', { min: 0, max: 12, label: 'Max Items'  })                
               ]
             }
           ]

@@ -8,6 +8,8 @@ DOM (Html document )
 Functions 
 Object oriented JS ( classes, interfaces, inheritance ... )
 REST API 
+ example read all items from sharepoint list 'NewHire'
+ https://yourSiteURl/_api/web/lists/getbytitle('NewHire')/items
 Events and Event handlers 
 Intro to React 
 

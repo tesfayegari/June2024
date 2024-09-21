@@ -18,11 +18,12 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Advanced
     "group": { "default": "Advanced" },
-    "title": { "default": "NewHire" },
-    "description": { "default": "NewHire description" },
-    "officeFabricIconFontName": "Page",
+    "title": { "default": "New Hire Employee" },
+    "description": { "default": "New Hire employees reading data from NewHire list where show equals true and number of items is managed in the webpart property" },
+    "officeFabricIconFontName": "People",
     "properties": {
-      "description": "NewHire"
+      "description": "New Hire",
+      "maxItems": 3
     }
   }]
 }
