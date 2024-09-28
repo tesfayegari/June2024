@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.20.4",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.19.0",
+    "libraryName": "mentor-selection-app",
+    "libraryId": "723aabd9-d4f1-4e4b-a3cf-b60c9d46b32c",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "mentor-selection-app",
+    "solutionShortDescription": "mentor-selection-app description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}

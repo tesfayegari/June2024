@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "mentor-selection-app-client-side-solution",
+    "id": "723aabd9-d4f1-4e4b-a3cf-b60c9d46b32c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.19.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "mentor-selection-app description"
+      },
+      "longDescription": {
+        "default": "mentor-selection-app description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "mentor-selection-app Feature",
+        "description": "The feature that activates elements of the mentor-selection-app solution.",
+        "id": "885251b1-cecb-4974-9d8b-f0381bd413f1",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/mentor-selection-app.sppkg"
+  }
+}
