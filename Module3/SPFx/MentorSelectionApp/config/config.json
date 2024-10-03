@@ -13,6 +13,7 @@
   },
   "externals": {},
   "localizedResources": {
-    "MentorSelectionWebPartStrings": "lib/webparts/mentorSelection/loc/{locale}.js"
+    "MentorSelectionWebPartStrings": "lib/webparts/mentorSelection/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
   }
 }

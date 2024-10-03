@@ -1,7 +1,14 @@
+import { WebPartContext } from "@microsoft/sp-webpart-base";
+
 export interface IMentorSelectionProps {
-  description: string;
-  isDarkTheme: boolean;
-  environmentMessage: string;
-  hasTeamsContext: boolean;
-  userDisplayName: string;
+  description: string;  
+  context: WebPartContext;
 }
+
+
+export interface IMentorSelectionState {
+  mentors: any[];
+  openDialog: boolean;
+  selectedMentor: any;
+}
+

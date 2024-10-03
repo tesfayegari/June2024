@@ -1,43 +1,92 @@
 import * as React from 'react';
-import styles from './MentorSelection.module.scss';
-import type { IMentorSelectionProps } from './IMentorSelectionProps';
-import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class MentorSelection extends React.Component<IMentorSelectionProps, {}> {
+import { LivePersona } from "@pnp/spfx-controls-react/lib/LivePersona";
+import { DefaultButton, Dialog, DialogFooter, DialogType, Persona, PersonaSize, PrimaryButton } from '@fluentui/react';
+
+import styles from './MentorSelection.module.scss';
+import type { IMentorSelectionProps, IMentorSelectionState } from './IMentorSelectionProps';
+import { ReadSPData } from '../services/ReadSPData';
+
+
+export default class MentorSelection extends React.Component<IMentorSelectionProps, IMentorSelectionState> {
+
+  svc: ReadSPData;
+
+  constructor(props: IMentorSelectionProps) {
+    super(props);
+    this.state = { mentors: [], openDialog: false, selectedMentor: null }
+
+  }
+
+  componentDidMount(): void {
+    //reading data from SP 
+    this.svc = new ReadSPData(this.props.context);
+    this.svc.readSharePointItems("Mentor", "$select=*,MentorName/Title, MentorName/EMail,Author/Title, Author/EMail,MenteeAssigned/Title, MenteeAssigned/EMail&$filter=Available ne false&$expand=Author,MenteeAssigned,MentorName")
+      .then(data => {
+        this.setState({ mentors: data });
+      }, error => console.log("Oops error ", error));
+  }
+
+  toggleHideDialog = (mentor: any) => {
+    console.log("Selected mentor ", mentor);
+    this.setState({ openDialog: !this.state.openDialog, selectedMentor: mentor })
+  }
+
+
   public render(): React.ReactElement<IMentorSelectionProps> {
     const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
+      description
     } = this.props;
 
+    const dialogContentProps = {
+      type: DialogType.normal,
+      title: `Confirmation window for ${this.state.selectedMentor?.MentorName?.Title}`,
+      subText: `Are you sure you want to selec ${this.state.selectedMentor?.MentorName?.Title}?`,
+    };
+    console.log("State variable is ", this.state)
+
     return (
-      <section className={`${styles.mentorSelection} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
+      <section className={`${styles.mentorSelection}`}>
+        <h2>{description}</h2>
+        {this.state.mentors.map(m =>
+          <>
+            <LivePersona upn={m.MentorName.EMail}
+              template={
+                <>
+                  <Persona
+                    imageUrl={`${this.props.context.pageContext.web.absoluteUrl}/_layouts/15/userphoto.aspx?size=L&username=${m.MentorName.EMail}`}
+                    text={m.MentorName.Title}
+                    secondaryText={m.MentorBio}
+                    size={PersonaSize.size72} />
+                </>
+              }
+              serviceScope={this.context.serviceScope}
+            />
+            <PrimaryButton text={`Select ${m.MentorName.Title}`} onClick={()=>this.toggleHideDialog(m)} allowDisabledFocus disabled={false} checked={false} />
+            <hr />
+          </>
+        )
+        }
+
+        <Dialog
+          hidden={!this.state.openDialog}
+          onDismiss={this.toggleHideDialog}
+          dialogContentProps={dialogContentProps}
+          isBlocking={true}
+        //modalProps={modalProps}
+        >
+          <DialogFooter>
+            <PrimaryButton onClick={this.toggleHideDialog} text="Yes" />
+            <DefaultButton onClick={this.toggleHideDialog} text="No" />
+          </DialogFooter>
+        </Dialog>
+
       </section>
     );
   }
 }
+
+
+
+
+
