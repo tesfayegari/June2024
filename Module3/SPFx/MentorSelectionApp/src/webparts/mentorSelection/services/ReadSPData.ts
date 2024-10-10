@@ -21,5 +21,34 @@ export class ReadSPData {
             }, error => { console.log('Oops error occured ', error); return []; });
     }
 
+    updateSharePointItem(listName: string, body: any, itemId: number) {
+        let etag: string | null;
+        return this.context.spHttpClient.get(`${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('${listName}')/items(${itemId})?$select=Id`,
+            SPHttpClient.configurations.v1)
+            .then((response: SPHttpClientResponse): Promise<any> => {
+                etag = (response.headers.get('ETag') == null) ? '' : response.headers.get('ETag');
+                return response.json();
+            }).then(d => {
+
+                let e = etag == null ? '' : etag;
+
+                return this.context.spHttpClient.post(`${this.context.pageContext.web.absoluteUrl}/_api/web/lists/getbytitle('${listName}')/items(${itemId})`,
+                    SPHttpClient.configurations.v1,
+                    {
+                        headers: {
+                            'Accept': 'application/json;odata=nometadata',
+                            'Content-type': 'application/json;odata=verbose',
+                            'odata-version': '',
+                            'IF-MATCH': e,
+                            'X-HTTP-Method': 'MERGE'
+                        },
+                        body: JSON.stringify(body)
+                    })
+                    .then((data: SPHttpClientResponse) => data.json())
+                    .then(response=>{data: 'Succeful'});                   
+            });
+
+    }
+
 
 }

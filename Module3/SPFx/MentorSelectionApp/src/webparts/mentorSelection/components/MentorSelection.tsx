@@ -14,8 +14,17 @@ export default class MentorSelection extends React.Component<IMentorSelectionPro
 
   constructor(props: IMentorSelectionProps) {
     super(props);
-    this.state = { mentors: [], openDialog: false, selectedMentor: null }
+    this.state = { mentors: [], openDialog: false, selectedMentor: null, currentUserSelectedMentor: false }
+    this.verifyCurrentUser()
+  }
 
+  private verifyCurrentUser() {
+    this.svc = new ReadSPData(this.props.context);
+    let email = this.props.context.pageContext.user.email;
+    this.svc.readSharePointItems("Mentor", `$select=MenteeAssigned/EMail&$filter=MenteeAssigned/EMail eq '${email}'&$expand=MenteeAssigned`)
+      .then(data => {
+        this.setState({ currentUserSelectedMentor: data.length > 0 });
+      }, error => console.log("Oops error ", error));
   }
 
   componentDidMount(): void {
@@ -27,9 +36,36 @@ export default class MentorSelection extends React.Component<IMentorSelectionPro
       }, error => console.log("Oops error ", error));
   }
 
-  toggleHideDialog = (mentor: any) => {
+  private toggleHideDialog = (mentor: any) => {
     console.log("Selected mentor ", mentor);
     this.setState({ openDialog: !this.state.openDialog, selectedMentor: mentor })
+  }
+
+  private confirmSelectedMentor = (agree: boolean) => {
+    this.setState({ openDialog: !this.state.openDialog });
+    if (agree) {
+      this.svc = new ReadSPData(this.props.context);
+      let body = {
+        '__metadata': {
+          'type': 'SP.Data.MentorListItem'
+        },
+        'MenteeAssignedId': 23,//Todo pick User ID from REST API 
+        'Available': false,
+        'MenteeAssignedDate': (new Date())
+      };
+
+      this.svc.updateSharePointItem("Mentor", body, this.state.selectedMentor.Id)
+        .then(response => {
+          //console.log("Response is ", response)
+          this.verifyCurrentUser();
+          this.componentDidMount();
+        }, error => {
+          console.log("Oops error ", error)
+          this.verifyCurrentUser();
+          this.componentDidMount();
+        })
+    }
+
   }
 
 
@@ -61,9 +97,12 @@ export default class MentorSelection extends React.Component<IMentorSelectionPro
                 </>
               }
               serviceScope={this.context.serviceScope}
+              disableHover={false}
             />
-            <PrimaryButton text={`Select ${m.MentorName.Title}`} onClick={()=>this.toggleHideDialog(m)} allowDisabledFocus disabled={false} checked={false} />
-            <hr />
+            <div style={{ padding: "10px" }}>
+              <PrimaryButton style={{ float: 'right' }} text={`Select ${m.MentorName.Title}`} onClick={() => this.toggleHideDialog(m)} allowDisabledFocus disabled={this.state.currentUserSelectedMentor} checked={false} />
+            </div>
+            <hr style={{ clear: 'both' }} />
           </>
         )
         }
@@ -76,8 +115,8 @@ export default class MentorSelection extends React.Component<IMentorSelectionPro
         //modalProps={modalProps}
         >
           <DialogFooter>
-            <PrimaryButton onClick={this.toggleHideDialog} text="Yes" />
-            <DefaultButton onClick={this.toggleHideDialog} text="No" />
+            <PrimaryButton onClick={() => this.confirmSelectedMentor(true)} text="Yes" />
+            <DefaultButton onClick={() => this.confirmSelectedMentor(false)} text="No" />
           </DialogFooter>
         </Dialog>
 
